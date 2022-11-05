@@ -1,7 +1,7 @@
 # SDLCursorDesigner
 
 GUI Cursor Designer
-generates C code for use in SDL Applications
+- generates C code for use in SDL Applications
 
 ## Usage
 - Simply click the pixels shown in the window to toggle Black, White or None
