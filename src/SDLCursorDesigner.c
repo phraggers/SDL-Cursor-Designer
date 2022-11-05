@@ -1,5 +1,6 @@
 
 #include <SDL2/SDL.h>
+#include "font.h"
 
 static int Width = 1200;
 static int Height = 800;
@@ -19,17 +20,17 @@ typedef struct
 } S_State;
 S_State* State;
 
-void FillFontMap()
+int FillFontMap()
 {
-	if (!State) return;
+	if (!State) return 0;
 
 	char* TextMap = SDL_malloc(100);
-	if (!TextMap) return;
+	if (!TextMap) return 0;
 	XY* TextMapXY = SDL_malloc(100);
 	if (!TextMapXY)
 	{
 		SDL_free(TextMap);
-		return;
+		return 0;
 	}
 
 	for (int i = 0; i < 10; i++)  TextMap[i] = 0x30 + i; //0-9
@@ -68,6 +69,8 @@ void FillFontMap()
 
 	SDL_free(TextMap);
 	SDL_free(TextMapXY);
+
+	return 1;
 }
 
 void Text(char* _Text, int _x, int _y, float _Size)
@@ -122,9 +125,18 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	FillFontMap();
+	if (!FillFontMap())
+	{
+		SDL_Log("Error Filling Font Map");
+		return -1;
+	}
 
-	SDL_Surface* FontSpriteSurface = SDL_LoadBMP("FontSpriteCascadiaMonoBold_36-73.bmp");
+	SDL_Surface* FontSpriteSurface;
+	{
+		SDL_RWops* fontrw = SDL_RWFromMem(font, sizeof(font));
+		FontSpriteSurface = SDL_LoadBMP_RW(fontrw, 0);
+		SDL_RWclose(fontrw);
+	}
 
 	if (!FontSpriteSurface)
 	{
