@@ -16,3 +16,8 @@ Win64 Build: (Beta v0.1.1)
 
 # Output preview
 ![alt text](https://github.com/phraggers/SDLCursorDesigner/blob/master/Screenshot_v010_output.png?raw=true)
+
+# Planned Features
+- ability to click-drag (or some hotkey combination) to change many pixels at once
+- colour mode, not just black & white
+- save and load cursors in progress
