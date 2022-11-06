@@ -1,4 +1,4 @@
-# SDLCursorDesigner
+# SDL Cursor Designer
 
 GUI Cursor Designer
 - generates C code for use in SDL Applications
