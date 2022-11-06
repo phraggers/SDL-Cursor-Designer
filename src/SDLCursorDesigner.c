@@ -299,7 +299,7 @@ static void OutputCursorCode()
 		{
 			SDL_RWwrite(fileout, "\"", 1, 1);
 			SDL_RWwrite(fileout, State->CursorPixels[i], 1, SDL_strlen(State->CursorPixels[i]));
-			SDL_RWwrite(fileout, "\"\n", 1, 2);
+			SDL_RWwrite(fileout, "\",\n", 1, 3);
 		}
 		SDL_RWwrite(fileout, filepart2, 1, SDL_strlen(filepart2));
 
@@ -389,8 +389,8 @@ int main(int argc, char** argv)
 	SetCursor();
 
 	SDL_Rect ResetBtnRect = { Width - 240, Height - 145 - 64*2 - 10*2, 200, 64 };
-	SDL_Rect ApplyBtnRect = { Width - 240, Height - 145 - 64 - 10, 200, 64 };
-	SDL_Rect SubmitBtnRect = { Width - 240, Height - 145, 200, 64 };
+	SDL_Rect PreviewBtnRect = { Width - 240, Height - 145 - 64 - 10, 200, 64 };
+	SDL_Rect GenerateBtnRect = { Width - 240, Height - 145, 200, 64 };
 
 	int Running = 1;
 
@@ -457,13 +457,13 @@ int main(int argc, char** argv)
 					SetCursor();
 				}
 
-				else if (MouseInRect(&mx, &my, &ApplyBtnRect))
+				else if (MouseInRect(&mx, &my, &PreviewBtnRect))
 				{
 					SetCursorPixels();
 					SetCursor();
 				}
 
-				else if (MouseInRect(&mx, &my, &SubmitBtnRect))
+				else if (MouseInRect(&mx, &my, &GenerateBtnRect))
 				{
 					SetCursorPixels();
 					SetCursor();
@@ -494,17 +494,17 @@ int main(int argc, char** argv)
 		Text("Reset", ResetBtnRect.x + (ResetBtnRect.w / 2) - (((int)((float)CharW * 0.5f) * 5) / 2),
 			 ResetBtnRect.y + 14, 0.5f);
 
-		// Apply
+		// Preview
 		SDL_SetRenderDrawColor(State->Renderer, 10, 52, 32, 0xff);
-		SDL_RenderFillRect(State->Renderer, &ApplyBtnRect);
-		Text("Apply", ApplyBtnRect.x + (ApplyBtnRect.w / 2) - (((int)((float)CharW * 0.5f) * 5) / 2),
-			 ApplyBtnRect.y + 14, 0.5f);
+		SDL_RenderFillRect(State->Renderer, &PreviewBtnRect);
+		Text("Preview", PreviewBtnRect.x + (PreviewBtnRect.w / 2) - (((int)((float)CharW * 0.5f) * 7) / 2),
+			 PreviewBtnRect.y + 14, 0.5f);
 
-		// Submit
+		// Generate
 		SDL_SetRenderDrawColor(State->Renderer, 0, 64, 12, 0xff);
-		SDL_RenderFillRect(State->Renderer, &SubmitBtnRect);
-		Text("Submit", SubmitBtnRect.x + (SubmitBtnRect.w / 2) - (((int)((float)CharW * 0.5f) * 6) / 2),
-			 SubmitBtnRect.y + 14, 0.5f);
+		SDL_RenderFillRect(State->Renderer, &GenerateBtnRect);
+		Text("Generate", GenerateBtnRect.x + (GenerateBtnRect.w / 2) - (((int)((float)CharW * 0.5f) * 8) / 2),
+			 GenerateBtnRect.y + 14, 0.5f);
 
 		SDL_RenderPresent(State->Renderer);
 	}
