@@ -8,7 +8,7 @@ GUI Cursor Designer
 - Click Apply to see the effect on current cursor
 - Click Submit to generate C code file.
 
-Win64 Build: (Beta v0.1.0)
+Win64 Build: (Beta v0.1.1)
 [>> DOWNLOAD <<](https://github.com/phraggers/SDLCursorDesigner/releases/download/v0.1.1/SDLCursorDesigner_v011_Win64.7z)
 
 # GUI preview
